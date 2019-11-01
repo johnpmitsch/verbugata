@@ -48,9 +48,9 @@ data[2..-1].each_with_index do |row, i|
     when "regular/irregular"
       verb["regular"] = cell == "R"
     when "Gerúndio"
-      verb["gerúndio"] = cell
+      verb["conjugations"]["gerúndio"] = cell
     when "Particípio passado"
-      verb["particípio passado"] = cell
+      verb["conjugations"]["particípio passado"] = cell
     else
       verb["conjugations"][header] = {} unless verb["conjugations"].has_key? header
       verb["conjugations"][header][person] = cell
@@ -68,8 +68,10 @@ end
 keyfile = "firebase_credentials/privatekey.json"
 creds = Google::Cloud::Firestore::Credentials.new keyfile
 firestore = Google::Cloud::Firestore.new project_id: "conjugation-practice", credentials: creds
-verb_table = firestore.collection "verbs"
+verb_collection = firestore.collection "verbs"
+conjugation_collection = firestore.collection "conjugation"
 
 all_verbs.each do |verb|
-  verb_table.doc(verb["verb"]).set(verb)
+  verb_collection.doc(verb["verb"]).set(verb.slice("verb", "rank", "example", "regular"))
+  conjugation_collection.doc(verb["verb"]).set(verb.slice("conjugations"))
 end

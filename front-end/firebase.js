@@ -17,12 +17,42 @@ let firebaseConfig = {
   measurementId: "G-measurement-id",
 };
 
+const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
+
 // Initialize Firebase
 const conj = firebase.initializeApp(firebaseConfig);
 const db = conj.firestore();
 
 const verbsRef = db.collection("verbs");
+const conjugationsRef = db.collection("conjugation");
 
-verbsRef.listDocuments().then(documentRefs => {
-  console.log(documentRefs);
+
+const getVerb = (verbId) => {
+  const verbRef = conjugationsRef.doc(verbId)
+
+  verbRef.get().then(verb => {
+    if (verb.exists) {
+      return verb.data();
+    } else {
+      console.log("No such document!");
+    }
+  }).catch((error) => {
+      console.log("Error getting document:", error);
+  });
+}
+
+console.log('hi')
+verb_names = []
+verbsRef.where("rank", "<", 25).get().then(verbs => {
+  verbs.forEach(verb => {
+    verb_names.push(verb.id);
+  });
+}).then(() => {
+  randomized_names = shuffleArray(verb_names);
+  random_name = randomized_names[0] ;
+  console.log(random_name);
+  console.log(getVerb(random_name));
+}).finally(() => {
+  process.exit(0)
 });
+

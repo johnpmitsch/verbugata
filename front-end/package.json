@@ -17,6 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "firebase": "^7.2.2",
+    "mobx": "^5.14.2",
     "next": "^9.1.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
