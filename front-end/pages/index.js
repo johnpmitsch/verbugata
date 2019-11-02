@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { observer, inject } from "mobx-react";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -10,49 +10,20 @@ import Select from "@material-ui/core/Select";
 import Router from "next/router";
 
 const Index = ({ verbStore }) => {
-  const [numberOfVerbs, setNumberOfVerbs] = useState(1000);
+  const { setAmount, amount, fetchVerbList, loading } = verbStore;
 
-  const handleNumberOfVerbsChange = event => {
-    setNumberOfVerbs(event.target.value);
-  };
-
-  const getVerbs = numberOfVerbs => {
-    verbStore.setVerbList(["ser", "estar"]);
-
-    Router.push({
-      pathname: "/conjugate"
+  const getVerbs = () => {
+    fetchVerbList().then(_ => {
+      Router.push({
+        pathname: "/conjugate"
+      });
     });
   };
 
-  //const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
-  //const getVerbs = (numberOfVerbs, db) => {
-  //  const verb_names = [];
-  //  const verbsRef = db.collection("verbs");
-
-  //  verbsRef
-  //    .where("rank", "<=", numberOfVerbs)
-  //    .get()
-  //    .then(verbs => {
-  //      verbs.forEach(verb => {
-  //        verb_names.push(verb.id);
-  //      });
-  //    })
-  //    .then(() => {
-  //      shuffleArray(verb_names);
-  //      setSelectedVerbs(randomizedNames);
-  //      /**Router.push(
-  //      {
-  //        pathname: "/conjugate",
-  //        query: { selectedVerbs: selectedVerbs }
-  //      },
-  //      "/conjugate"
-  //    );**/
-  //    });
-  //};
-
   return (
     <React.Fragment>
-      <div>{numberOfVerbs}</div>
+      <div>{loading && <CircularProgress />}</div>
+      <div>{amount}</div>
       <Grid container direction="row" justify="center" alignItems="center">
         <FormControl>
           <InputLabel shrink id="number-of-verbs-labell">
@@ -61,8 +32,8 @@ const Index = ({ verbStore }) => {
           <Select
             labelId="number-of-verbs-labell"
             id="number-of-verbs"
-            value={numberOfVerbs}
-            onChange={handleNumberOfVerbsChange}
+            value={amount}
+            onChange={event => setAmount(event.target.value)}
           >
             <MenuItem value={10}>Top 10</MenuItem>
             <MenuItem value={25}>Top 25</MenuItem>
@@ -74,9 +45,10 @@ const Index = ({ verbStore }) => {
           <FormHelperText>Verbs to use in the exercise</FormHelperText>
         </FormControl>
         <Button
+          disabled={loading}
           variant="contained"
           color="primary"
-          onClick={() => getVerbs(numberOfVerbs)}
+          onClick={() => getVerbs()}
         >
           Start Practice
         </Button>
