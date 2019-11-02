@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { observer, inject } from "mobx-react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -6,63 +7,51 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Router from "next/router";
 
-var firebase = require("firebase/app");
-
-// Add the Firebase products that you want to use
-require("firebase/auth");
-require("firebase/firestore");
-
-const Index = () => {
+const Index = ({ verbStore }) => {
   const [numberOfVerbs, setNumberOfVerbs] = useState(1000);
-  const [selectedVerbs, setSelectedVerbs] = useState([]);
-  let db;
 
   const handleNumberOfVerbsChange = event => {
     setNumberOfVerbs(event.target.value);
   };
 
-  const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
+  const getVerbs = numberOfVerbs => {
+    verbStore.setVerbList(["ser", "estar"]);
 
-  const getVerbs = () => {
-    if (!db) {
-      let firebaseConfig = {
-        apiKey: "api-key",
-        authDomain: "conjugation-practice.firebaseapp.com",
-        databaseURL: "https://conjugation-practice.firebaseio.com",
-        projectId: "conjugation-practice",
-        storageBucket: "conjugation-practice.appspot.com",
-        messagingSenderId: "sender-id",
-        appId: "app-id",
-        measurementId: "G-measurement-id"
-      };
-
-      // Initialize Firebase
-      const fb = firebase.initializeApp(firebaseConfig);
-      db = fb.firestore();
-    }
-
-    const verbsRef = db.collection("verbs");
-    const conjugationsRef = db.collection("conjugation");
-
-    const verb_names = [];
-    verbsRef
-      .where("rank", "<=", numberOfVerbs)
-      .get()
-      .then(verbs => {
-        verbs.forEach(verb => {
-          verb_names.push(verb.id);
-        });
-      })
-      .then(() => {
-        const randomizedNames = shuffleArray(verb_names);
-        setSelectedVerbs(randomizedNames);
-      });
+    Router.push({
+      pathname: "/conjugate"
+    });
   };
 
+  //const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
+  //const getVerbs = (numberOfVerbs, db) => {
+  //  const verb_names = [];
+  //  const verbsRef = db.collection("verbs");
+
+  //  verbsRef
+  //    .where("rank", "<=", numberOfVerbs)
+  //    .get()
+  //    .then(verbs => {
+  //      verbs.forEach(verb => {
+  //        verb_names.push(verb.id);
+  //      });
+  //    })
+  //    .then(() => {
+  //      shuffleArray(verb_names);
+  //      setSelectedVerbs(randomizedNames);
+  //      /**Router.push(
+  //      {
+  //        pathname: "/conjugate",
+  //        query: { selectedVerbs: selectedVerbs }
+  //      },
+  //      "/conjugate"
+  //    );**/
+  //    });
+  //};
+
   return (
-    <div>
-      <div>{selectedVerbs.join(", ")}</div>
+    <React.Fragment>
       <div>{numberOfVerbs}</div>
       <Grid container direction="row" justify="center" alignItems="center">
         <FormControl>
@@ -82,14 +71,18 @@ const Index = () => {
             <MenuItem value={500}>Top 500</MenuItem>
             <MenuItem value={1000}>Top 1000</MenuItem>
           </Select>
-          <FormHelperText>Number of Verbs to use</FormHelperText>
+          <FormHelperText>Verbs to use in the exercise</FormHelperText>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={() => getVerbs()}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => getVerbs(numberOfVerbs)}
+        >
           Start Practice
         </Button>
       </Grid>
-    </div>
+    </React.Fragment>
   );
 };
 
-export default Index;
+export default inject("verbStore")(observer(Index));
