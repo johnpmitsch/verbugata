@@ -1,6 +1,7 @@
 import App from "next/app";
 import { Provider } from "mobx-react";
 import Store, { fetchInitialStoreState } from "../stores";
+import db from "../components/firebase";
 
 class MyApp extends App {
   state = {

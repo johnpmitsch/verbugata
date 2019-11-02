@@ -1,21 +1,14 @@
 import firebase from "firebase/app";
+import "firebase/firestore";
 
-const firebaseConfig = {
+const config = {
   apiKey: "api-key",
   authDomain: "conjugation-practice.firebaseapp.com",
   databaseURL: "https://conjugation-practice.firebaseio.com",
   projectId: "conjugation-practice",
-  storageBucket: "conjugation-practice.appspot.com",
-  messagingSenderId: "sender-id",
-  appId: "app-id",
-  measurementId: "G-measurement-id"
+  appId: "conjugation-practice"
 };
 
-class FirestoreDatabase {
-  constructor() {
-    const app = firebase.initializeApp(firebaseConfig);
-    this.db = app.firestore();
-  }
-}
-
-export default FirestoreDatabase;
+export default !firebase.apps.length
+  ? firebase.initializeApp(config).firestore()
+  : firebase.app().firestore();
