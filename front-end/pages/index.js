@@ -9,11 +9,26 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Router from "next/router";
 
+const mockSelectedTenses = [
+  "Presente",
+  "Pretérito Perfeito",
+  "Pretérito Imperfeito",
+  "Subjuntivo Presente"
+];
+
 const Index = ({ verbStore }) => {
-  const { setAmount, amount, fetchVerbList, loading } = verbStore;
+  const {
+    setAmount,
+    amount,
+    fetchVerbList,
+    loading,
+    setSelectedTenses
+  } = verbStore;
+
+  setSelectedTenses(mockSelectedTenses);
 
   const getVerbs = () => {
-    fetchVerbList().then(_ => {
+    fetchVerbList().then(() => {
       Router.push({
         pathname: "/conjugate"
       });

@@ -6,6 +6,8 @@ class VerbStore {
   @observable amount = 1000;
   @observable currentVerbIndex = 0;
   @observable loading = false;
+  @observable conjugations = null;
+  @observable selectedTenses = [];
 
   @action.bound setVerbList(verbList) {
     this.verbList = verbList;
@@ -13,6 +15,14 @@ class VerbStore {
 
   @action.bound setAmount(amount) {
     this.amount = amount;
+  }
+
+  @action.bound nextVerb() {
+    this.currentVerbIndex += 1;
+  }
+
+  @action.bound setSelectedTenses(selectedTenses) {
+    this.selectedTenses = selectedTenses;
   }
 
   @computed get currentVerb() {
@@ -24,13 +34,14 @@ class VerbStore {
   fetchVerbList = flow(function*() {
     const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
     const verb_names = [];
-    const verbsRef = db.collection("verbs");
+    const listsRef = db.collection("lists");
 
     this.loading = true;
     try {
-      const verbs = yield verbsRef.where("rank", "<=", this.amount).get();
+      const allVerbsDoc = yield listsRef.doc("verbs").get();
       this.loading = false;
-      verbs.forEach(verb => verb_names.push(verb.id));
+      const allVerbs = allVerbsDoc.data()["all"];
+      allVerbs.slice(0, this.amount).forEach(verb => verb_names.push(verb));
       this.verbList = shuffleArray(verb_names);
     } catch (error) {
       console.error(error);
@@ -38,13 +49,13 @@ class VerbStore {
     }
   }).bind(this);
 
-  fetchConjugationList = flow(function*() {
-    const conjugationRef = db.collection("conjugations");
+  fetchConjugations = flow(function*() {
+    const conjugationRef = db.collection("conjugation");
 
     this.loading = true;
     try {
-      const conjugation = yield verbsRef.doc(this.currentVerb()).get();
-      console.log(conjugation);
+      const conjugations = yield conjugationRef.doc(this.currentVerb).get();
+      this.conjugations = conjugations.data();
     } catch (error) {
       console.error(error);
       this.loading = false;

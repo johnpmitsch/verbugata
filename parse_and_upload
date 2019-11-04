@@ -68,9 +68,16 @@ end
 keyfile = "firebase_credentials/privatekey.json"
 creds = Google::Cloud::Firestore::Credentials.new keyfile
 firestore = Google::Cloud::Firestore.new project_id: "conjugation-practice", credentials: creds
+
 verb_collection = firestore.collection "verbs"
 conjugation_collection = firestore.collection "conjugation"
+list_collection = firestore.collection "lists"
 
+# Store all verb names in an array for easy querying
+all_verb_names = all_verbs.map { |v| v["verb"] };
+list_collection.doc("verbs").set(all: all_verb_names)
+
+# Store verb details and conjugations
 all_verbs.each do |verb|
   verb_collection.doc(verb["verb"]).set(verb.slice("verb", "rank", "example", "regular"))
   conjugation_collection.doc(verb["verb"]).set(verb.slice("conjugations"))

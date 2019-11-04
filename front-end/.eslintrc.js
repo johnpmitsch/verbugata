@@ -1,4 +1,5 @@
 module.exports = {
+  "parser": "babel-eslint",
   "extends": ["airbnb-base", "plugin:react/recommended", "plugin:prettier/recommended"],
   "settings": {
     "react": {
@@ -13,6 +14,8 @@ module.exports = {
     "consistent-return": "off",
     "array-callback-return": "off",
     "prefer-destructuring": "off",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off"
   },
 };
