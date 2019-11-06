@@ -21,7 +21,8 @@
     "mobx-react": "^6.1.4",
     "next": "^9.1.2",
     "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react-dom": "^16.11.0",
+    "react-icons": "^3.8.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",

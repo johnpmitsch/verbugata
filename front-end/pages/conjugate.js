@@ -50,6 +50,13 @@ const Conjugate = ({ verbStore }) => {
           <div>
             Current Verb: <b>{currentVerb}</b>
           </div>
+          <a
+            href={`https://translate.google.com/?um=1&ie=UTF-8&hl=en&client=tw-ob#pt/en/${currentVerb}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Translate
+          </a>
           {currentVerbIndex + 1 < verbList.length && (
             <div>Next Verb: {verbList[currentVerbIndex + 1]}</div>
           )}
