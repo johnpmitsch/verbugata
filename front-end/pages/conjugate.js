@@ -35,7 +35,7 @@ const Conjugate = ({ verbStore }) => {
   };
 
   const submitAnswers = e => {
-    setCheckAnswers(true);
+    setCheckAnswers(!checkAnswers);
     e.preventDefault();
   };
 
@@ -61,20 +61,25 @@ const Conjugate = ({ verbStore }) => {
             <div>Next Verb: {verbList[currentVerbIndex + 1]}</div>
           )}
           {conjugations && (
-            <form onSubmit={submitAnswers}>
-              {selectedTenses.map((tense, i) => (
-                <TenseForm
-                  checkAnswers={checkAnswers}
-                  key={i}
-                  tense={tense}
-                  conjugations={conjugations["conjugations"]}
-                />
-              ))}
+            <React.Fragment>
+              <div>
+                Type: {conjugations["regular"] ? "regular" : "irregular"}
+              </div>
+              <form onSubmit={submitAnswers}>
+                {selectedTenses.map((tense, i) => (
+                  <TenseForm
+                    checkAnswers={checkAnswers}
+                    key={i}
+                    tense={tense}
+                    conjugations={conjugations["conjugations"]}
+                  />
+                ))}
 
-              <Button type="submit" variant="contained" color="primary">
-                Check Answers
-              </Button>
-            </form>
+                <Button type="submit" variant="contained" color="primary">
+                  {checkAnswers ? "Hide" : "Check"} Answers
+                </Button>
+              </form>
+            </React.Fragment>
           )}
         </div>
       ) : (
