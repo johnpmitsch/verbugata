@@ -7,7 +7,6 @@ const TenseForm = ({ conjugations, tense, checkAnswers, pt_br = true }) => {
   const conjugation = conjugations[tense];
   if (pt_br) persons = persons.filter(p => !second_person.includes(p));
 
-  console.log(persons);
   return (
     <div>
       <b>{tense}</b>

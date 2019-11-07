@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
@@ -14,12 +14,19 @@ const Conjugate = ({ verbStore }) => {
     fetchConjugations,
     selectedTenses,
     nextVerb,
+    verbDetails,
+    fetchVerbDetails,
     conjugations
   } = verbStore;
 
   const router = useRouter();
 
-  if (currentVerb && !conjugations) fetchConjugations(currentVerb);
+  useEffect(() => {
+    if (currentVerb && !conjugations) {
+      fetchConjugations();
+      fetchVerbDetails();
+    }
+  }, []);
 
   // If page is refreshed, state is lost and need to go back to form
   if (verbList.length <= 0) {
@@ -60,10 +67,10 @@ const Conjugate = ({ verbStore }) => {
           {currentVerbIndex + 1 < verbList.length && (
             <div>Next Verb: {verbList[currentVerbIndex + 1]}</div>
           )}
-          {conjugations && (
+          {conjugations && verbDetails && (
             <React.Fragment>
               <div>
-                Type: {conjugations["regular"] ? "regular" : "irregular"}
+                Type: {verbDetails["regular"] ? "regular" : "irregular"}
               </div>
               <form onSubmit={submitAnswers}>
                 {selectedTenses.map((tense, i) => (

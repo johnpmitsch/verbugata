@@ -8,6 +8,7 @@ class VerbStore {
   @observable loading = false;
   @observable conjugations = null;
   @observable selectedTenses = [];
+  @observable verbDetails = {};
 
   @action.bound setVerbList(verbList) {
     this.verbList = verbList;
@@ -35,7 +36,6 @@ class VerbStore {
     const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
     const verb_names = [];
     const listsRef = db.collection("lists");
-
     this.loading = true;
     try {
       const allVerbsDoc = yield listsRef.doc("verbs").get();
@@ -49,9 +49,21 @@ class VerbStore {
     }
   }).bind(this);
 
+  fetchVerbDetails = flow(function*() {
+    const verbDetailRef = db.collection("verbs");
+    this.loading = true;
+    try {
+      const verbDetails = yield verbDetailRef.doc(this.currentVerb).get();
+      this.loading = false;
+      this.verbDetails = verbDetails.data();
+    } catch (error) {
+      console.error(error);
+      this.loading = false;
+    }
+  }).bind(this);
+
   fetchConjugations = flow(function*() {
     const conjugationRef = db.collection("conjugation");
-
     this.loading = true;
     try {
       const conjugations = yield conjugationRef.doc(this.currentVerb).get();
