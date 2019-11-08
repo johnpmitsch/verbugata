@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useRouter } from "next/router";
 import Grid from "@material-ui/core/Grid";
 import VerbInfoDisplay from "../components/VerbInfoDisplay";
 import ConjugationWrapper from "../components/ConjugationWrapper";
+import LoadingWrapper from "../components/LoadingWrapper";
 
 const Conjugate = ({ verbStore }) => {
   const [checkAnswers, setCheckAnswers] = useState(false);
@@ -18,40 +18,20 @@ const Conjugate = ({ verbStore }) => {
     verbDetails,
     fetchVerbDetails,
     conjugations,
-    resetLoading,
-    resetVerbDetails
+    resetVerbDetails,
+    fetchVerbList
   } = verbStore;
 
-  const router = useRouter();
-  // If page is refreshed, state is lost and need to go back to form
-  if (verbList.length <= 0) {
-    // Since we are using SSR, check if client before redirecting
-    const isClient = typeof window !== "undefined";
-    if (isClient) router.push({ pathname: "/" });
-  }
-
-  // Ensure loading stops when conjugation is loaded
   useEffect(() => {
-    resetLoading();
-  }, [conjugations]);
-
-  useEffect(() => {
-    if (currentVerb && !conjugations) {
-      fetchConjugations();
-    }
+    fetchVerbList();
   }, []);
-
-  useEffect(() => {
-    if (currentVerb && currentVerb !== verbDetails.verb) {
-      fetchVerbDetails();
-    }
-  });
 
   useEffect(() => {
     if (currentVerb) {
       resetVerbDetails();
       setCheckAnswers(false);
       fetchConjugations();
+      fetchVerbDetails();
     }
   }, [currentVerb]);
 
@@ -61,31 +41,33 @@ const Conjugate = ({ verbStore }) => {
   };
 
   return (
-    <Grid container justify={"center"} alignItems={"center"} spacing={5}>
-      {verbList.length > 0 && currentVerbIndex < verbList.length && (
-        <React.Fragment>
-          <Grid item xs={12}>
-            <VerbInfoDisplay
-              currentVerbIndex={currentVerbIndex}
-              currentVerb={currentVerb}
-              verbList={verbList}
-              verbDetails={verbDetails}
-              getNextVerb={nextVerb}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {conjugations && verbDetails && (
-              <ConjugationWrapper
-                submitAnswers={submitAnswers}
-                checkAnswers={checkAnswers}
-                selectedTenses={selectedTenses}
-                conjugations={conjugations}
+    <LoadingWrapper condition={verbList.length > 0}>
+      <Grid container justify={"center"} alignItems={"center"} spacing={5}>
+        {currentVerbIndex < verbList.length && (
+          <React.Fragment>
+            <Grid item xs={12}>
+              <VerbInfoDisplay
+                currentVerbIndex={currentVerbIndex}
+                currentVerb={currentVerb}
+                verbList={verbList}
+                verbDetails={verbDetails}
+                getNextVerb={nextVerb}
               />
-            )}
-          </Grid>
-        </React.Fragment>
-      )}
-    </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <LoadingWrapper condition={conjugations && verbDetails}>
+                <ConjugationWrapper
+                  submitAnswers={submitAnswers}
+                  checkAnswers={checkAnswers}
+                  selectedTenses={selectedTenses}
+                  conjugations={conjugations}
+                />
+              </LoadingWrapper>
+            </Grid>
+          </React.Fragment>
+        )}
+      </Grid>
+    </LoadingWrapper>
   );
 };
 

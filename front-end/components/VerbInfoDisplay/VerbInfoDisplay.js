@@ -12,13 +12,7 @@ export default function VerbInfoDisplay({
 }) {
   return (
     <React.Fragment>
-      <Grid
-        container
-        justify={"center"}
-        alignItems={"center"}
-        spacing={5}
-        style={{ paddingTop: "20px" }}
-      >
+      <Grid container justify={"center"} alignItems={"center"} spacing={5}>
         <Grid item xs={12} md={4}>
           {currentVerbIndex > 0 && (
             <Hidden smDown>
