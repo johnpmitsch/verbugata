@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
-import TenseForm from "../components/TenseForm";
+import Grid from "@material-ui/core/Grid";
+import VerbInfoDisplay from "../components/VerbInfoDisplay";
+import ConjugationWrapper from "../components/ConjugationWrapper";
 
 const Conjugate = ({ verbStore }) => {
   const [checkAnswers, setCheckAnswers] = useState(false);
@@ -16,17 +17,30 @@ const Conjugate = ({ verbStore }) => {
     nextVerb,
     verbDetails,
     fetchVerbDetails,
-    conjugations
+    conjugations,
+    resetLoading
   } = verbStore;
 
   const router = useRouter();
 
+  // Ensure loading stops when conjugation is loaded
+  useEffect(() => {
+    resetLoading();
+  }, [conjugations]);
+
   useEffect(() => {
     if (currentVerb && !conjugations) {
       fetchConjugations();
-      fetchVerbDetails();
     }
   }, []);
+
+  useEffect(() => {
+    console.log(currentVerb);
+    console.log(verbDetails.verb);
+    if (currentVerb !== verbDetails.verb) {
+      fetchVerbDetails();
+    }
+  });
 
   // If page is refreshed, state is lost and need to go back to form
   if (verbList.length <= 0) {
@@ -38,7 +52,7 @@ const Conjugate = ({ verbStore }) => {
   const getNextVerb = () => {
     setCheckAnswers(false);
     nextVerb();
-    fetchConjugations(currentVerb);
+    fetchConjugations();
   };
 
   const submitAnswers = e => {
@@ -47,55 +61,33 @@ const Conjugate = ({ verbStore }) => {
   };
 
   return (
-    <React.Fragment>
-      <div>Verbs Loaded: {verbList.length}</div>
+    <Grid container justify={"center"} alignItems={"center"} spacing={5}>
       {verbList.length > 0 && currentVerbIndex < verbList.length ? (
-        <div>
-          {currentVerbIndex > 0 && (
-            <div>Previous Verb: {verbList[currentVerbIndex - 1]}</div>
-          )}
-          <div>
-            Current Verb: <b>{currentVerb}</b>
-          </div>
-          <a
-            href={`https://translate.google.com/?um=1&ie=UTF-8&hl=en&client=tw-ob#pt/en/${currentVerb}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Translate
-          </a>
-          {currentVerbIndex + 1 < verbList.length && (
-            <div>Next Verb: {verbList[currentVerbIndex + 1]}</div>
-          )}
-          {conjugations && verbDetails && (
-            <React.Fragment>
-              <div>
-                Type: {verbDetails["regular"] ? "regular" : "irregular"}
-              </div>
-              <form onSubmit={submitAnswers}>
-                {selectedTenses.map((tense, i) => (
-                  <TenseForm
-                    checkAnswers={checkAnswers}
-                    key={i}
-                    tense={tense}
-                    conjugations={conjugations["conjugations"]}
-                  />
-                ))}
-
-                <Button type="submit" variant="contained" color="primary">
-                  {checkAnswers ? "Hide" : "Check"} Answers
-                </Button>
-              </form>
-            </React.Fragment>
-          )}
-        </div>
+        <React.Fragment>
+          <Grid item xs={12}>
+            <VerbInfoDisplay
+              currentVerbIndex={currentVerbIndex}
+              currentVerb={currentVerb}
+              verbList={verbList}
+              verbDetails={verbDetails}
+              getNextVerb={getNextVerb}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {conjugations && verbDetails && (
+              <ConjugationWrapper
+                submitAnswers={submitAnswers}
+                checkAnswers={checkAnswers}
+                selectedTenses={selectedTenses}
+                conjugations={conjugations}
+              />
+            )}
+          </Grid>
+        </React.Fragment>
       ) : (
         <div>Congratulations! You finished all the verbs in the list!</div>
       )}
-      <Button variant="contained" color="primary" onClick={() => getNextVerb()}>
-        Next Verb
-      </Button>
-    </React.Fragment>
+    </Grid>
   );
 };
 

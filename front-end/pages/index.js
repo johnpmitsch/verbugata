@@ -1,6 +1,6 @@
 import { observer, inject } from "mobx-react";
+import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -22,10 +22,15 @@ const Index = ({ verbStore }) => {
     amount,
     fetchVerbList,
     loading,
-    setSelectedTenses
+    setSelectedTenses,
+    resetVerbList
   } = verbStore;
 
   setSelectedTenses(mockSelectedTenses);
+
+  useEffect(() => {
+    resetVerbList();
+  }, []);
 
   const getVerbs = () => {
     fetchVerbList().then(() => {
@@ -37,7 +42,6 @@ const Index = ({ verbStore }) => {
 
   return (
     <React.Fragment>
-      <div>{loading && <CircularProgress />}</div>
       <div>{amount}</div>
       <Grid container direction="row" justify="center" alignItems="center">
         <FormControl>

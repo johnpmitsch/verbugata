@@ -26,6 +26,18 @@ class VerbStore {
     this.selectedTenses = selectedTenses;
   }
 
+  @action.bound resetLoading() {
+    this.loading = false;
+  }
+
+  @action.bound resetVerbList() {
+    this.verbList = [];
+    this.currentVerbIndex = 0;
+    this.conjugations = null;
+    this.verbDetails = {};
+    this.loading = false;
+  }
+
   @computed get currentVerb() {
     return this.verbList.length > 0
       ? this.verbList[this.currentVerbIndex]
