@@ -13,7 +13,7 @@ export default function ConjugationWrapper({
       <form onSubmit={submitAnswers}>
         <Grid container justify={"center"} alignItems={"center"} spacing={5}>
           {selectedTenses.map((tense, i) => (
-            <Grid item md={4} sm={6} xs={12}>
+            <Grid key={i} item md={4} sm={6} xs={12}>
               <TenseForm
                 checkAnswers={checkAnswers}
                 key={i}
@@ -22,9 +22,11 @@ export default function ConjugationWrapper({
               />
             </Grid>
           ))}
-          <Button type="submit" variant="contained" color="primary">
-            {checkAnswers ? "Hide" : "Check"} Answers
-          </Button>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary">
+              {checkAnswers ? "Hide" : "Check"} Answers
+            </Button>
+          </Grid>
         </Grid>
       </form>
     </React.Fragment>

@@ -23,6 +23,12 @@ const Conjugate = ({ verbStore }) => {
   } = verbStore;
 
   const router = useRouter();
+  // If page is refreshed, state is lost and need to go back to form
+  if (verbList.length <= 0) {
+    // Since we are using SSR, check if client before redirecting
+    const isClient = typeof window !== "undefined";
+    if (isClient) router.push({ pathname: "/" });
+  }
 
   // Ensure loading stops when conjugation is loaded
   useEffect(() => {
@@ -36,33 +42,27 @@ const Conjugate = ({ verbStore }) => {
   }, []);
 
   useEffect(() => {
-    if (currentVerb !== verbDetails.verb) {
+    if (currentVerb && currentVerb !== verbDetails.verb) {
       fetchVerbDetails();
     }
   });
 
-  // If page is refreshed, state is lost and need to go back to form
-  if (verbList.length <= 0) {
-    // Since we are using SSR, check if client before redirecting
-    const isClient = typeof window !== "undefined";
-    if (isClient) router.push({ pathname: "/" });
-  }
-
-  const getNextVerb = () => {
-    resetVerbDetails();
-    setCheckAnswers(false);
-    nextVerb();
-    fetchConjugations();
-  };
+  useEffect(() => {
+    if (currentVerb) {
+      resetVerbDetails();
+      setCheckAnswers(false);
+      fetchConjugations();
+    }
+  }, [currentVerb]);
 
   const submitAnswers = e => {
-    setCheckAnswers(!checkAnswers);
     e.preventDefault();
+    setCheckAnswers(!checkAnswers);
   };
 
   return (
     <Grid container justify={"center"} alignItems={"center"} spacing={5}>
-      {verbList.length > 0 && currentVerbIndex < verbList.length ? (
+      {verbList.length > 0 && currentVerbIndex < verbList.length && (
         <React.Fragment>
           <Grid item xs={12}>
             <VerbInfoDisplay
@@ -70,7 +70,7 @@ const Conjugate = ({ verbStore }) => {
               currentVerb={currentVerb}
               verbList={verbList}
               verbDetails={verbDetails}
-              getNextVerb={getNextVerb}
+              getNextVerb={nextVerb}
             />
           </Grid>
           <Grid item xs={12}>
@@ -84,8 +84,6 @@ const Conjugate = ({ verbStore }) => {
             )}
           </Grid>
         </React.Fragment>
-      ) : (
-        <div>Congratulations! You finished all the verbs in the list!</div>
       )}
     </Grid>
   );

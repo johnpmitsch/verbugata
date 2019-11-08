@@ -19,7 +19,9 @@ class VerbStore {
   }
 
   @action.bound nextVerb() {
-    this.currentVerbIndex += 1;
+    if (this.currentVerbIndex + 1 < this.verbList.length) {
+      this.currentVerbIndex += 1;
+    }
   }
 
   @action.bound setSelectedTenses(selectedTenses) {
@@ -66,6 +68,7 @@ class VerbStore {
   }).bind(this);
 
   fetchVerbDetails = flow(function*() {
+    if (!this.currentVerb) return;
     const verbDetailRef = db.collection("verbs");
     this.loading = true;
     try {
@@ -79,6 +82,7 @@ class VerbStore {
   }).bind(this);
 
   fetchConjugations = flow(function*() {
+    if (!this.currentVerb) return;
     const conjugationRef = db.collection("conjugation");
     this.loading = true;
     try {
