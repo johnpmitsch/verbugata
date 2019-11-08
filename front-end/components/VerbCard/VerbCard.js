@@ -16,21 +16,23 @@ export default function VerbCard({ verbName, title, regular, active = false }) {
           <b>{verbName}</b>
         </Typography>
         {active && (
-          <a
-            href={`https://translate.google.com/?um=1&ie=UTF-8&hl=en&client=tw-ob#pt/en/${verbName}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MdGTranslate
-              size={32}
-              style={{ textDecoration: "none", color: "#4285F4" }}
-            />
-          </a>
-        )}
-        {regular && (
-          <Box fontWeight="fontWeightLight" fontStyle="italic">
-            <Typography>{regular ? "Regular" : "Irregular"}</Typography>
-          </Box>
+          <React.Fragment>
+            <a
+              href={`https://translate.google.com/?um=1&ie=UTF-8&hl=en&client=tw-ob#pt/en/${verbName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MdGTranslate
+                size={32}
+                style={{ textDecoration: "none", color: "#4285F4" }}
+              />
+            </a>
+            {regular != null && (
+              <Box fontWeight="fontWeightLight" fontStyle="italic">
+                <Typography>{regular ? "Regular" : "Irregular"}</Typography>
+              </Box>
+            )}
+          </React.Fragment>
         )}
       </CardContent>
     </Card>

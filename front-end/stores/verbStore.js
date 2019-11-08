@@ -30,12 +30,16 @@ class VerbStore {
     this.loading = false;
   }
 
+  @action.bound resetVerbDetails() {
+    this.conjugations = null;
+    this.verbDetails = {};
+  }
+
   @action.bound resetVerbList() {
     this.verbList = [];
     this.currentVerbIndex = 0;
-    this.conjugations = null;
-    this.verbDetails = {};
-    this.loading = false;
+    this.resetVerbDetails();
+    this.resetLoading();
   }
 
   @computed get currentVerb() {

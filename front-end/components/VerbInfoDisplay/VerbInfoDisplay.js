@@ -10,7 +10,6 @@ export default function VerbInfoDisplay({
   verbDetails,
   getNextVerb
 }) {
-  console.log(verbDetails.regular);
   return (
     <React.Fragment>
       <Grid

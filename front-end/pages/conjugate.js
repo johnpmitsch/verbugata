@@ -18,7 +18,8 @@ const Conjugate = ({ verbStore }) => {
     verbDetails,
     fetchVerbDetails,
     conjugations,
-    resetLoading
+    resetLoading,
+    resetVerbDetails
   } = verbStore;
 
   const router = useRouter();
@@ -35,8 +36,6 @@ const Conjugate = ({ verbStore }) => {
   }, []);
 
   useEffect(() => {
-    console.log(currentVerb);
-    console.log(verbDetails.verb);
     if (currentVerb !== verbDetails.verb) {
       fetchVerbDetails();
     }
@@ -50,6 +49,7 @@ const Conjugate = ({ verbStore }) => {
   }
 
   const getNextVerb = () => {
+    resetVerbDetails();
     setCheckAnswers(false);
     nextVerb();
     fetchConjugations();
