@@ -6,8 +6,13 @@ import { FaCheck } from "react-icons/fa";
 const TenseInput = ({ person, checkAnswers, answer }) => {
   const [input, setInput] = useState(null);
 
-  const checkAnswer = (user, answer) =>
-    input.toLowerCase() === answer.toLowerCase();
+  const checkAnswer = (user, answer) => {
+    if (user && answer) {
+      return user.toLowerCase() === answer.toLowerCase();
+    } else {
+      return false;
+    }
+  };
   return (
     <React.Fragment>
       <Grid item sm={1}>
