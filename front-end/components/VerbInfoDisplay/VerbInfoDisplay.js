@@ -11,11 +11,13 @@ export default function VerbInfoDisplay({
   getNextVerb,
   getPreviousVerb
 }) {
+  const notTheFirstCard = currentVerbIndex > 0;
+  const thereAreMoreCards = currentVerbIndex + 1 < verbList.length;
   return (
     <React.Fragment>
       <Grid container justify={"center"} alignItems={"center"} spacing={5}>
         <Grid item xs={12} md={4}>
-          {currentVerbIndex > 0 && (
+          {notTheFirstCard && (
             <Hidden smDown>
               <VerbCard
                 verbName={verbList[currentVerbIndex - 1]}
@@ -35,7 +37,7 @@ export default function VerbInfoDisplay({
           )}
         </Grid>
         <Grid item xs={12} md={4}>
-          {currentVerbIndex + 1 < verbList.length && (
+          {thereAreMoreCards && (
             <Hidden smDown>
               <VerbCard
                 verbName={verbList[currentVerbIndex + 1]}
@@ -48,6 +50,7 @@ export default function VerbInfoDisplay({
           <Button
             variant="contained"
             color="primary"
+            disabled={!notTheFirstCard}
             onClick={() => getPreviousVerb()}
           >
             Previous Verb
@@ -57,6 +60,7 @@ export default function VerbInfoDisplay({
           <Button
             variant="contained"
             color="primary"
+            disabled={!thereAreMoreCards}
             onClick={() => getNextVerb()}
           >
             Next Verb
