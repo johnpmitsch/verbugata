@@ -4,7 +4,7 @@ const avaiableTenses = {
   Presente: {
     english: "Present",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         eu <b>como</b> o sanduíche
       </Typography>
     )
@@ -12,7 +12,7 @@ const avaiableTenses = {
   "Pretérito Perfeito": {
     english: "Simple Past",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Eu <b>fiz</b> o meu trabalho
       </Typography>
     )
@@ -20,7 +20,7 @@ const avaiableTenses = {
   "Pretérito Imperfeito": {
     english: "Past Imperfect",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Eu <b>corria</b> muito naquela rua
       </Typography>
     )
@@ -28,7 +28,7 @@ const avaiableTenses = {
   "Pretérito mais-que-perfeito": {
     english: "Past Perfect",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Ontem ele <b>destruiu</b> o carro que comprara antes
       </Typography>
     )
@@ -36,7 +36,7 @@ const avaiableTenses = {
   "Futuro do Presente": {
     english: "Simple Future",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Eles <b>chegarão</b> ao Rio daqui a dois dias
       </Typography>
     )
@@ -48,7 +48,7 @@ const avaiableTenses = {
   "Subjuntivo Pretérito Imperfeito": {
     english: "Subjunctive Imperfect Past",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Quis que ele <b>fosse</b> feliz.
       </Typography>
     )
@@ -64,7 +64,7 @@ const avaiableTenses = {
   "Futuro do Pretérito": {
     english: "Conditional",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Ele <b>poderia</b> ir com vocês ao cinema.
       </Typography>
     )
@@ -72,15 +72,15 @@ const avaiableTenses = {
   "Imperativo Afirmativo": {
     english: "Affirmative Imperative",
     example: (
-      <Typography>
-        <b>Façam</b>silêncio, por favor!
+      <Typography component={"span"}>
+        <b>Façam</b> silêncio, por favor!
       </Typography>
     )
   },
   "Imperativo Negativo": {
     english: "Negative Imperative",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Não <b>venha</b> agora, por favor.
       </Typography>
     )
@@ -88,15 +88,15 @@ const avaiableTenses = {
   gerúndio: {
     english: "Gerund",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Gabriela está se <b>exercitando</b> todos os dias.
       </Typography>
     )
   },
   "particípio passado": {
-    english: "past participle",
+    english: "Past Participle",
     example: (
-      <Typography>
+      <Typography component={"span"}>
         Eles <b>tinham</b> dançado muito na festa.
       </Typography>
     )

@@ -9,18 +9,6 @@ import availableTenses from "../lib/tenses";
 const Index = ({ verbStore }) => {
   const { setAmount, amount, setSelectedTenses, resetVerbList } = verbStore;
 
-  // Need to add single input form and clean up data to support the imperativo tense
-  const exclude = [
-    "gerúndio",
-    "particípio passado",
-    "Imperativo Negativo",
-    "Imperativo Afirmativo"
-  ];
-
-  setSelectedTenses(
-    Object.keys(availableTenses).filter(x => !exclude.includes(x))
-  );
-
   useEffect(() => {
     resetVerbList();
   }, []);
@@ -34,7 +22,11 @@ const Index = ({ verbStore }) => {
         alignItems="center"
         spacing={5}
       >
-        <StartingForm setAmount={setAmount} amount={amount} />
+        <StartingForm
+          setSelectedTenses={setSelectedTenses}
+          setAmount={setAmount}
+          amount={amount}
+        />
         <Button
           variant="contained"
           color="primary"
