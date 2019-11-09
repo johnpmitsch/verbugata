@@ -23,6 +23,12 @@ class VerbStore {
     }
   }
 
+  @action.bound previousVerb() {
+    if (this.currentVerbIndex - 1 >= 0) {
+      this.currentVerbIndex -= 1;
+    }
+  }
+
   @action.bound setSelectedTenses(selectedTenses) {
     this.selectedTenses = selectedTenses;
   }

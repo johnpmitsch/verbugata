@@ -4,18 +4,22 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Router from "next/router";
 import StartingForm from "../components/StartingForm";
-
-const mockSelectedTenses = [
-  "Presente",
-  "Pretérito Perfeito",
-  "Pretérito Imperfeito",
-  "Subjuntivo Presente"
-];
+import availableTenses from "../lib/tenses";
 
 const Index = ({ verbStore }) => {
   const { setAmount, amount, setSelectedTenses, resetVerbList } = verbStore;
 
-  setSelectedTenses(mockSelectedTenses);
+  // Need to add single input form and clean up data to support the imperativo tense
+  const exclude = [
+    "gerúndio",
+    "particípio passado",
+    "Imperativo Negativo",
+    "Imperativo Afirmativo"
+  ];
+
+  setSelectedTenses(
+    Object.keys(availableTenses).filter(x => !exclude.includes(x))
+  );
 
   useEffect(() => {
     resetVerbList();

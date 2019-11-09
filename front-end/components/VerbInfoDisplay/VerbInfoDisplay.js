@@ -8,7 +8,8 @@ export default function VerbInfoDisplay({
   currentVerb,
   verbList,
   verbDetails,
-  getNextVerb
+  getNextVerb,
+  getPreviousVerb
 }) {
   return (
     <React.Fragment>
@@ -43,7 +44,16 @@ export default function VerbInfoDisplay({
             </Hidden>
           )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={3} xs={6}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => getPreviousVerb()}
+          >
+            Previous Verb
+          </Button>
+        </Grid>
+        <Grid item md={3} xs={6}>
           <Button
             variant="contained"
             color="primary"

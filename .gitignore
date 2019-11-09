@@ -1,3 +1,5 @@
 firebase_credentials
 node_modules
 .next
+.swp
+.swo

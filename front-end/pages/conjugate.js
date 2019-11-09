@@ -15,6 +15,7 @@ const Conjugate = ({ verbStore }) => {
     fetchConjugations,
     selectedTenses,
     nextVerb,
+    previousVerb,
     verbDetails,
     fetchVerbDetails,
     conjugations,
@@ -52,6 +53,7 @@ const Conjugate = ({ verbStore }) => {
                 verbList={verbList}
                 verbDetails={verbDetails}
                 getNextVerb={nextVerb}
+                getPreviousVerb={previousVerb}
               />
             </Grid>
             <Grid item xs={12}>
