@@ -6,14 +6,18 @@ import { FaCheck } from "react-icons/fa";
 const TenseInput = ({ person, checkAnswers, answer }) => {
   const [input, setInput] = useState(null);
 
+  const checkAnswer = (user, answer) =>
+    input.toLowerCase() === answer.toLowerCase();
   return (
     <React.Fragment>
       <Grid item sm={1}>
-        {checkAnswers && input === answer && <FaCheck color="green" />}
+        {checkAnswers && checkAnswer(input, answer) && (
+          <FaCheck color="green" />
+        )}
       </Grid>
       <Grid item sm={5}>
         <TextField
-          error={checkAnswers && input !== answer}
+          error={checkAnswers && !checkAnswer(input, answer)}
           helperText={person}
           label={checkAnswers ? answer : null}
           onChange={e => setInput(e.target.value)}
