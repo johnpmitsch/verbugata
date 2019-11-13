@@ -34,7 +34,9 @@ class MyApp extends App {
         <CssBaseline />
         <Provider verbStore={this.state.store.verbStore}>
           <AppHeader />
-          <Container style={{ textAlign: "center", margin: "30px 0px" }}>
+          <Container
+            style={{ textAlign: "center", margin: "40px 0px 100px 0px" }}
+          >
             <Component {...pageProps} />
           </Container>
         </Provider>
