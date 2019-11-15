@@ -1,8 +1,12 @@
 # Verbugata
 
-The front end for [verbugata](verbugata.com), a tool to help practice Brazilian portuguese verb conjugations.
+The front end for [verbugata](https://www.verbugata.com), a tool to help practice Brazilian portuguese verb conjugations.
 
-## Technical
+## Technical Info
 
-This is written React and uses the next.js framework. The backend is hosted at https://github.com/johnpmitsch/verbugata-api
+This is written React and uses the next.js framework. The backend can be found at https://github.com/johnpmitsch/verbugata-api
+
+## Contributions
+
+Contributions and issues are welcome, be sure to specify details
 
