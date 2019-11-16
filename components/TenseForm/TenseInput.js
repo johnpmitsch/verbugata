@@ -6,12 +6,11 @@ import { FaCheck } from "react-icons/fa";
 const TenseInput = ({ person, checkAnswers, answer }) => {
   const [input, setInput] = useState(null);
 
-  const checkAnswer = (user, answer) => {
+  const checkAnswer = (user, userAnswer) => {
     if (user && answer) {
-      return user.toLowerCase() === answer.toLowerCase();
-    } else {
-      return false;
+      return user.toLowerCase() === userAnswer.toLowerCase();
     }
+    return false;
   };
   return (
     <React.Fragment>

@@ -6,13 +6,12 @@ import Box from "@material-ui/core/Box";
 import { MdGTranslate } from "react-icons/md";
 
 export default function VerbCard({ verbName, title, regular, active = false }) {
-  const getRegular = regular => {
+  const getRegular = reg => {
     // using two equal signs to check for both null and undefined
-    if (regular == null) {
+    if (reg == null) {
       return String.fromCharCode(10240); // A blank space (braille unicode) to keep alignment
-    } else {
-      return regular ? "Regular" : "Irregular";
     }
+    return reg ? "Regular" : "Irregular";
   };
   return (
     <Card>

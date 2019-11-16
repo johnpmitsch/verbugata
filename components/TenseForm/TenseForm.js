@@ -6,9 +6,9 @@ let persons = ["eu", "nós", "tu", "vós", "você", "eles"];
 
 const secondPerson = ["tu", "vós"];
 
-const TenseForm = ({ conjugations, tense, checkAnswers, pt_br = true }) => {
+const TenseForm = ({ conjugations, tense, checkAnswers, ptBr = true }) => {
   const conjugation = conjugations[tense];
-  if (pt_br) persons = persons.filter(p => !secondPerson.includes(p));
+  if (ptBr) persons = persons.filter(p => !secondPerson.includes(p));
 
   return (
     <Grid container justify={"center"} alignItems={"center"} spacing={2}>

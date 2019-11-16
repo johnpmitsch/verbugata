@@ -18,5 +18,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-undef": "off",
     "lines-between-class-members": "off",
+    "no-prototype-builtins": "off",
   },
 };
