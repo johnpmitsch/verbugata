@@ -2,11 +2,9 @@ import { observer, inject } from "mobx-react";
 import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import FormLabel from "@material-ui/core/FormLabel";
 import Router from "next/router";
 import StartingForm from "../components/StartingForm";
+import Welcome from "../components/Welcome";
 
 const Index = ({ verbStore }) => {
   const {
@@ -32,17 +30,7 @@ const Index = ({ verbStore }) => {
         spacing={5}
       >
         <Grid xs={10} md={6}>
-          <Paper style={{ padding: "20px" }}>
-            <FormLabel component="legend">
-              <Typography variant="h5" component="legend">
-                Portuguese Verb Conjugation Practice
-              </Typography>
-            </FormLabel>
-            <Typography variant="p">
-              Verbugata is a tool to help practice conjugating Portuguese verbs.
-              Select the options and start practicing!
-            </Typography>
-          </Paper>
+          <Welcome />
         </Grid>
         <StartingForm
           setSelectedTenses={setSelectedTenses}
