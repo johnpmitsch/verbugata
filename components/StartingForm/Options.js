@@ -4,16 +4,18 @@ import Switch from "@material-ui/core/Switch";
 
 export default function Options({ includeTu, toggleIncludeTu }) {
   return (
-    <FormControlLabel
-      control={
-        <Switch
-          checked={includeTu}
-          onChange={toggleIncludeTu}
-          color="primary"
-          value="includeTu"
-        />
-      }
-      label="Include tu/vós?"
-    />
+    <div style={{ margin: "20px 0px" }}>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={includeTu}
+            onChange={toggleIncludeTu}
+            color="primary"
+            value="includeTu"
+          />
+        }
+        label="Include tu/vós?"
+      />
+    </div>
   );
 }

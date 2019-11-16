@@ -12,10 +12,8 @@ export default function StartingForm({
 }) {
   return (
     <React.Fragment>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={4}>
         <NumberOfVerbs amount={amount} setAmount={setAmount} />
-      </Grid>
-      <Grid item xs={12}>
         <Options includeTu={includeTu} toggleIncludeTu={toggleIncludeTu} />
       </Grid>
       <Grid item xs={12}>

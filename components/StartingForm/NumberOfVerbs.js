@@ -13,7 +13,7 @@ export default function NumberOfVerbs({ amount, setAmount }) {
     <Grid container justify="flex-start" alignItems="flex-start" spacing={5}>
       <Grid item xs={12} style={{ paddingBottom: "20px" }}>
         <FormLabel component="legend">
-          <Typography variant={"h4"}>Verb Selection</Typography>
+          <Typography variant={"h5"}>Verb Selection</Typography>
         </FormLabel>
       </Grid>
 

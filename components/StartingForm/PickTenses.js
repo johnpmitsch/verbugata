@@ -42,7 +42,7 @@ export default function PickTenses({ setSelectedTenses }) {
     <FormControl component="fieldset" className="pick-tense-form">
       <Grid item xs={12} style={{ paddingBottom: "20px" }}>
         <FormLabel component="legend">
-          <Typography variant={"h4"}>Pick Tenses</Typography>
+          <Typography variant={"h5"}>Pick Tenses</Typography>
         </FormLabel>
       </Grid>
       <FormGroup>
