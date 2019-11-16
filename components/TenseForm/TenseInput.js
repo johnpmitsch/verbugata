@@ -14,12 +14,12 @@ const TenseInput = ({ person, checkAnswers, answer }) => {
   };
   return (
     <React.Fragment>
-      <Grid item sm={1}>
+      <Grid item xs={1}>
         {checkAnswers && checkAnswer(input, answer) && (
           <FaCheck color="green" />
         )}
       </Grid>
-      <Grid item sm={5}>
+      <Grid item xs={5}>
         <TextField
           error={checkAnswers && !checkAnswer(input, answer)}
           helperText={person}

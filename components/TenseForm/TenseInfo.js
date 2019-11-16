@@ -23,7 +23,8 @@ export default function TenseInfo({ tense }) {
 
   return (
     <React.Fragment>
-      <Grid item xs={10}>
+      <Grid item xs={2}></Grid>
+      <Grid item xs={8}>
         <Box fontWeight="fontWeightBold">
           <Typography variant="subtitle1">{tense}</Typography>
         </Box>
