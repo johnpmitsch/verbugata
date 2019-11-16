@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Router from "next/router";
 import StartingForm from "../components/StartingForm";
-import availableTenses from "../lib/tenses";
 
 const Index = ({ verbStore }) => {
   const { setAmount, amount, setSelectedTenses, resetVerbList } = verbStore;

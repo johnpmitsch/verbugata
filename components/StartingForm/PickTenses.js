@@ -8,8 +8,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import tenses from "../../lib/tenses";
 import { Typography } from "@material-ui/core";
+import tenses from "../../lib/tenses";
 
 export default function PickTenses({ setSelectedTenses }) {
   const [checked, setChecked] = useState({});
@@ -35,7 +35,6 @@ export default function PickTenses({ setSelectedTenses }) {
     const filteredTenses = Object.keys(checked)
       .filter(t => checked[t])
       .filter(x => !exclude.includes(x));
-    console.log(filteredTenses);
     setSelectedTenses(filteredTenses);
   });
 
