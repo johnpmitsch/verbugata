@@ -7,6 +7,7 @@ class VerbStore {
   @observable currentVerbIndex = 0;
   @observable selectedTenses = [];
   @observable verbDetails = {};
+  @observable includeTu = false;
 
   @action.bound setVerbList(verbList) {
     this.verbList = verbList;
@@ -40,6 +41,10 @@ class VerbStore {
     this.verbList = [];
     this.currentVerbIndex = 0;
     this.resetVerbDetails();
+  }
+
+  @action.bound toggleIncludeTu() {
+    this.includeTu = !this.includeTu;
   }
 
   @computed get currentVerb() {

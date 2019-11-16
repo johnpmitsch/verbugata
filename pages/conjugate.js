@@ -18,7 +18,8 @@ const Conjugate = ({ verbStore }) => {
     verbDetails,
     fetchVerbDetails,
     resetVerbDetails,
-    fetchVerbList
+    fetchVerbList,
+    includeTu
   } = verbStore;
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const Conjugate = ({ verbStore }) => {
                   checkAnswers={checkAnswers}
                   selectedTenses={selectedTenses}
                   verbDetails={verbDetails}
+                  includeTu={includeTu}
                 />
               </LoadingWrapper>
             </Grid>

@@ -6,7 +6,14 @@ import Router from "next/router";
 import StartingForm from "../components/StartingForm";
 
 const Index = ({ verbStore }) => {
-  const { setAmount, amount, setSelectedTenses, resetVerbList } = verbStore;
+  const {
+    setAmount,
+    amount,
+    setSelectedTenses,
+    resetVerbList,
+    includeTu,
+    toggleIncludeTu
+  } = verbStore;
 
   useEffect(() => {
     resetVerbList();
@@ -25,6 +32,8 @@ const Index = ({ verbStore }) => {
           setSelectedTenses={setSelectedTenses}
           setAmount={setAmount}
           amount={amount}
+          includeTu={includeTu}
+          toggleIncludeTu={toggleIncludeTu}
         />
         <Button
           variant="contained"
