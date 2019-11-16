@@ -16,6 +16,7 @@ module.exports = {
     "prefer-destructuring": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-no-undef": "off"
+    "react/jsx-no-undef": "off",
+    "lines-between-class-members": "off",
   },
 };

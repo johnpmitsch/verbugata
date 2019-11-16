@@ -18,7 +18,7 @@ export default function ConjugationWrapper({
                 checkAnswers={checkAnswers}
                 key={i}
                 tense={tense}
-                conjugations={conjugations["conjugations"]}
+                conjugations={conjugations}
               />
             </Grid>
           ))}
