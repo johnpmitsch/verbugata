@@ -6,7 +6,7 @@ export default function ConjugationWrapper({
   submitAnswers,
   checkAnswers,
   selectedTenses,
-  conjugations
+  verbDetails
 }) {
   return (
     <React.Fragment>
@@ -18,7 +18,7 @@ export default function ConjugationWrapper({
                 checkAnswers={checkAnswers}
                 key={i}
                 tense={tense}
-                conjugations={conjugations}
+                conjugations={verbDetails.conjugations[0]}
               />
             </Grid>
           ))}

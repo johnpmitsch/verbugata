@@ -7,9 +7,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "./node_modules/.bin/eslint pages/**/*.js",
-    "fixLinting": "./node_modules/.bin/eslint --fix pages/**/*.js",
-    "format": "./node_modules/.bin/prettier --write pages/**/*.js"
+    "lint": "./node_modules/.bin/eslint **/*.js",
+    "fixLinting": "./node_modules/.bin/eslint --fix **/*.js",
+    "format": "./node_modules/.bin/prettier --write **/*.js"
   },
   "keywords": [],
   "author": "",

@@ -12,13 +12,11 @@ const Conjugate = ({ verbStore }) => {
     verbList,
     currentVerb,
     currentVerbIndex,
-    fetchConjugations,
     selectedTenses,
     nextVerb,
     previousVerb,
     verbDetails,
     fetchVerbDetails,
-    conjugations,
     resetVerbDetails,
     fetchVerbList
   } = verbStore;
@@ -31,7 +29,6 @@ const Conjugate = ({ verbStore }) => {
     if (currentVerb) {
       resetVerbDetails();
       setCheckAnswers(false);
-      fetchConjugations();
       fetchVerbDetails();
     }
   }, [currentVerb]);
@@ -57,12 +54,12 @@ const Conjugate = ({ verbStore }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <LoadingWrapper condition={conjugations && verbDetails}>
+              <LoadingWrapper condition={verbDetails.verb}>
                 <ConjugationWrapper
                   submitAnswers={submitAnswers}
                   checkAnswers={checkAnswers}
                   selectedTenses={selectedTenses}
-                  conjugations={conjugations}
+                  verbDetails={verbDetails}
                 />
               </LoadingWrapper>
             </Grid>

@@ -4,11 +4,11 @@ import TenseInfo from "./TenseInfo";
 
 let persons = ["eu", "nós", "tu", "vós", "você", "eles"];
 
-const second_person = ["tu", "vós"];
+const secondPerson = ["tu", "vós"];
 
 const TenseForm = ({ conjugations, tense, checkAnswers, pt_br = true }) => {
   const conjugation = conjugations[tense];
-  if (pt_br) persons = persons.filter(p => !second_person.includes(p));
+  if (pt_br) persons = persons.filter(p => !secondPerson.includes(p));
 
   return (
     <Grid container justify={"center"} alignItems={"center"} spacing={2}>

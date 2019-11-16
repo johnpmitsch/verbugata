@@ -1,14 +1,10 @@
 import { observable, action, computed, flow } from "mobx";
-import db from "../components/firebase";
 import VerbApi from "../lib/VerbApi";
 
 class VerbStore {
-  constructor() {}
-
   @observable verbList = [];
   @observable amount = 1000;
   @observable currentVerbIndex = 0;
-  @observable conjugations = null;
   @observable selectedTenses = [];
   @observable verbDetails = {};
 
@@ -37,7 +33,6 @@ class VerbStore {
   }
 
   @action.bound resetVerbDetails() {
-    this.conjugations = null;
     this.verbDetails = {};
   }
 
@@ -53,6 +48,7 @@ class VerbStore {
       : null;
   }
 
+  // eslint-disable-next-line func-names
   fetchVerbList = flow(function*() {
     const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
     try {
@@ -63,25 +59,12 @@ class VerbStore {
     }
   }).bind(this);
 
+  // eslint-disable-next-line func-names
   fetchVerbDetails = flow(function*() {
     if (!this.currentVerb) return;
     try {
-      const verbDetails = yield new VerbApi().getVerbDetails(this.currentVerb);
-      console.log(verbDetails);
-      if (verbDetails.length > 0) this.verbDetails = verbDetails[0];
-    } catch (error) {
-      console.error(error);
-    }
-  }).bind(this);
-
-  fetchConjugations = flow(function*() {
-    if (!this.currentVerb) return;
-    try {
-      const conjugations = yield new VerbApi().getConjugations(
-        this.currentVerb
-      );
-      const conjugations = yield conjugationRef.doc(this.currentVerb).get();
-      this.conjugations = conjugations.data();
+      const details = yield new VerbApi().getVerbDetails(this.currentVerb);
+      this.verbDetails = details[0];
     } catch (error) {
       console.error(error);
     }
