@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TenseInput from "./TenseInput";
 import TenseInfo from "./TenseInfo";
 
-let persons = ["eu", "nós", "tu", "vós", "você", "eles"];
+let persons = ["eu", "nós", "tu", "vós", "ele/ela", "eles/elas"];
 
 const secondPerson = ["tu", "vós"];
 

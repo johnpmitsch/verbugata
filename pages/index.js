@@ -1,10 +1,18 @@
 import { observer, inject } from "mobx-react";
 import { useEffect } from "react";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
+import { makeStyles } from "@material-ui/core/styles";
 import Router from "next/router";
 import StartingForm from "../components/StartingForm";
 import Welcome from "../components/Welcome";
+
+const useStyles = makeStyles(theme => ({
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(7)
+  }
+}));
 
 const Index = ({ verbStore }) => {
   const {
@@ -15,6 +23,8 @@ const Index = ({ verbStore }) => {
     includeTu,
     toggleIncludeTu
   } = verbStore;
+
+  const classes = useStyles();
 
   useEffect(() => {
     resetVerbList();
@@ -29,7 +39,7 @@ const Index = ({ verbStore }) => {
         alignItems="center"
         spacing={5}
       >
-        <Grid xs={10} md={6}>
+        <Grid xs={10} md={6} item>
           <Welcome />
         </Grid>
         <StartingForm
@@ -39,9 +49,10 @@ const Index = ({ verbStore }) => {
           includeTu={includeTu}
           toggleIncludeTu={toggleIncludeTu}
         />
-        <Button
-          variant="contained"
+        <Fab
+          variant="extended"
           color="primary"
+          className={classes.fab}
           onClick={() =>
             Router.push({
               pathname: "/conjugate"
@@ -49,7 +60,7 @@ const Index = ({ verbStore }) => {
           }
         >
           Start Practice
-        </Button>
+        </Fab>
       </Grid>
     </React.Fragment>
   );
