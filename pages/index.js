@@ -39,7 +39,7 @@ const Index = ({ verbStore }) => {
         alignItems="center"
         spacing={5}
       >
-        <Grid xs={10} md={6} item>
+        <Grid xs={12} md={6} item>
           <Welcome />
         </Grid>
         <StartingForm

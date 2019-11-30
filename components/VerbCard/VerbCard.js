@@ -3,9 +3,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { withTheme } from "@material-ui/core/styles";
 import { MdGTranslate } from "react-icons/md";
 
-export default function VerbCard({ verbName, title, regular, active = false }) {
+function VerbCard({ theme, verbName, title, regular, active = false }) {
   const getRegular = reg => {
     // using two equal signs to check for both null and undefined
     if (reg == null) {
@@ -13,6 +14,7 @@ export default function VerbCard({ verbName, title, regular, active = false }) {
     }
     return reg ? "Regular" : "Irregular";
   };
+
   return (
     <Card>
       <CardContent>
@@ -31,7 +33,10 @@ export default function VerbCard({ verbName, title, regular, active = false }) {
             >
               <MdGTranslate
                 size={32}
-                style={{ textDecoration: "none", color: "#4285F4" }}
+                style={{
+                  textDecoration: "none",
+                  color: theme.palette.primary.light
+                }}
               />
             </a>
             <Box fontWeight="fontWeightLight" fontStyle="italic">
@@ -43,3 +48,4 @@ export default function VerbCard({ verbName, title, regular, active = false }) {
     </Card>
   );
 }
+export default withTheme(VerbCard);

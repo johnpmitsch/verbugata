@@ -10,7 +10,7 @@ export default function Options({ includeTu, toggleIncludeTu }) {
           <Switch
             checked={includeTu}
             onChange={toggleIncludeTu}
-            color="primary"
+            color="secondary"
             value="includeTu"
           />
         }
