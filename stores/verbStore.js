@@ -3,7 +3,7 @@ import VerbApi from "../lib/VerbApi";
 
 class VerbStore {
   @observable verbList = [];
-  @observable amount = 1000;
+  @observable amount = 100;
   @observable currentVerbIndex = 0;
   @observable selectedTenses = [];
   @observable verbDetails = {};
