@@ -4,10 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import VerbInfoDisplay from "../components/VerbInfoDisplay";
 import ConjugationWrapper from "../components/ConjugationWrapper";
 import LoadingWrapper from "../components/LoadingWrapper";
+import PageWrapper from "../components/PageWrapper";
 
 const Conjugate = ({ verbStore }) => {
   const [checkAnswers, setCheckAnswers] = useState(false);
-
   const {
     verbList,
     currentVerb,
@@ -40,8 +40,8 @@ const Conjugate = ({ verbStore }) => {
   };
 
   return (
-    <LoadingWrapper condition={verbList.length > 0}>
-      <Grid container justify={"center"} alignItems={"center"} spacing={5}>
+    <PageWrapper>
+      <LoadingWrapper condition={verbList.length > 0}>
         {currentVerbIndex < verbList.length && (
           <React.Fragment>
             <Grid item xs={12}>
@@ -67,8 +67,8 @@ const Conjugate = ({ verbStore }) => {
             </Grid>
           </React.Fragment>
         )}
-      </Grid>
-    </LoadingWrapper>
+      </LoadingWrapper>
+    </PageWrapper>
   );
 };
 

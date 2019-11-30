@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Router from "next/router";
 import StartingForm from "../components/StartingForm";
 import Welcome from "../components/Welcome";
+import PageWrapper from "../components/PageWrapper";
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -31,38 +32,30 @@ const Index = ({ verbStore }) => {
   }, []);
 
   return (
-    <React.Fragment>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={5}
-      >
-        <Grid xs={12} md={6} item>
-          <Welcome />
-        </Grid>
-        <StartingForm
-          setSelectedTenses={setSelectedTenses}
-          setAmount={setAmount}
-          amount={amount}
-          includeTu={includeTu}
-          toggleIncludeTu={toggleIncludeTu}
-        />
-        <Fab
-          variant="extended"
-          color="primary"
-          className={classes.fab}
-          onClick={() =>
-            Router.push({
-              pathname: "/conjugate"
-            })
-          }
-        >
-          Start Practice
-        </Fab>
+    <PageWrapper>
+      <Grid xs={12} md={6} item>
+        <Welcome />
       </Grid>
-    </React.Fragment>
+      <StartingForm
+        setSelectedTenses={setSelectedTenses}
+        setAmount={setAmount}
+        amount={amount}
+        includeTu={includeTu}
+        toggleIncludeTu={toggleIncludeTu}
+      />
+      <Fab
+        variant="extended"
+        color="primary"
+        className={classes.fab}
+        onClick={() =>
+          Router.push({
+            pathname: "/conjugate"
+          })
+        }
+      >
+        Start Practice
+      </Fab>
+    </PageWrapper>
   );
 };
 
