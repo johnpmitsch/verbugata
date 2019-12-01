@@ -8,9 +8,20 @@ import Store, { fetchInitialStoreState } from "../stores";
 import theme from "../lib/theme";
 
 class MyApp extends App {
-  state = {
-    store: new Store()
-  };
+  constructor() {
+    super();
+    this.state = {
+      store: new Store()
+    };
+  }
+
+  static componentDidMount() {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }
 
   // Fetching serialized(JSON) store state
   static async getInitialProps(appContext) {
