@@ -1,8 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography } from "@material-ui/core";
-import FormLabel from "@material-ui/core/FormLabel";
 import NumberOfVerbs from "./NumberOfVerbs";
 import Options from "./Options";
 import PickTenses from "./PickTenses";

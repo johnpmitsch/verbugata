@@ -1,7 +1,11 @@
 import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { FaCheck } from "react-icons/fa";
+import {
+  FaRegCheckCircle as Correct,
+  FaRegTimesCircle as Incorrect,
+  FaRegCircle
+} from "react-icons/fa";
 
 const TenseInput = ({ person, checkAnswers, answer }) => {
   const [input, setInput] = useState(null);
@@ -12,18 +16,25 @@ const TenseInput = ({ person, checkAnswers, answer }) => {
     }
     return false;
   };
+
+  const validationIcon = (show, correct) => {
+    if (show) {
+      return correct ? <Correct color="green" /> : <Incorrect color="red" />;
+    }
+    return <FaRegCircle color={"gainsboro"} />;
+  };
+
   return (
     <React.Fragment>
       <Grid item xs={1}>
-        {checkAnswers && checkAnswer(input, answer) && (
-          <FaCheck color="green" />
-        )}
+        {validationIcon(checkAnswers, checkAnswer(input, answer))}
       </Grid>
+
       <Grid item xs={5}>
         <TextField
           error={checkAnswers && !checkAnswer(input, answer)}
           helperText={person}
-          label={checkAnswers ? answer : null}
+          label={checkAnswers ? answer : " "}
           onChange={e => setInput(e.target.value)}
           margin="normal"
         />

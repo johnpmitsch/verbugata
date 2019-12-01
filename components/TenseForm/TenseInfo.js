@@ -3,8 +3,8 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { MdInfoOutline } from "react-icons/md";
 import Box from "@material-ui/core/Box";
+import { MdInfoOutline } from "react-icons/md";
 import availableTenses from "../../lib/tenses";
 
 export default function TenseInfo({ tense }) {
@@ -26,7 +26,7 @@ export default function TenseInfo({ tense }) {
       <Grid item xs={2}></Grid>
       <Grid item xs={8}>
         <Box fontWeight="fontWeightBold">
-          <Typography variant="subtitle1">{tense}</Typography>
+          <Typography variant="h6">{tense}</Typography>
         </Box>
       </Grid>
       <Grid item xs={2}>
