@@ -3,13 +3,15 @@ import Grid from "@material-ui/core/Grid";
 import TenseInput from "./TenseInput";
 import TenseInfo from "./TenseInfo";
 
-let persons = ["eu", "nós", "tu", "vós", "ele/ela", "eles/elas"];
+const allPersons = ["eu", "nós", "tu", "vós", "ele/ela", "eles/elas"];
 
 const secondPerson = ["tu", "vós"];
 
 const TenseForm = ({ conjugations, tense, checkAnswers, ptBr = true }) => {
   const conjugation = conjugations[tense];
-  if (ptBr) persons = persons.filter(p => !secondPerson.includes(p));
+  const persons = ptBr
+    ? allPersons.filter(p => !secondPerson.includes(p))
+    : allPersons;
 
   return (
     <React.Fragment>
