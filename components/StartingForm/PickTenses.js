@@ -16,12 +16,7 @@ export default function PickTenses({ setSelectedTenses }) {
   const [allTenses, setAllTenses] = useState([]);
 
   // Need to add single input form and clean up data to support the imperativo tense
-  const exclude = [
-    "gerúndio",
-    "particípio passado",
-    "Imperativo Negativo",
-    "Imperativo Afirmativo"
-  ];
+  const exclude = ["gerúndio", "particípio passado"];
 
   const handleChange = name => event => {
     setChecked({ ...checked, [name]: event.target.checked });

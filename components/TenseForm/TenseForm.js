@@ -4,14 +4,25 @@ import TenseInput from "./TenseInput";
 import TenseInfo from "./TenseInfo";
 
 const allPersons = ["eu", "nós", "tu", "vós", "ele/ela", "eles/elas"];
-
+const firstPersonSingular = ["eu"];
 const secondPerson = ["tu", "vós"];
 
-const TenseForm = ({ conjugations, tense, checkAnswers, ptBr = true }) => {
+const getPersons = (ptBr, imperativo) => {
+  if (ptBr) return allPersons.filter(p => !secondPerson.includes(p));
+  if (imperativo)
+    return allPersons.filter(p => !firstPersonSingular.includes(p));
+  return allPersons;
+};
+
+const TenseForm = ({
+  conjugations,
+  tense,
+  checkAnswers,
+  ptBr = true,
+  imperativo = false
+}) => {
+  const persons = getPersons(ptBr, imperativo);
   const conjugation = conjugations[tense];
-  const persons = ptBr
-    ? allPersons.filter(p => !secondPerson.includes(p))
-    : allPersons;
 
   return (
     <React.Fragment>
