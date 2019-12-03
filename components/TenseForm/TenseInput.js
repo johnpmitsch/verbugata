@@ -12,7 +12,7 @@ const TenseInput = ({ text, checkAnswers, answer, disabled = false }) => {
 
   const checkAnswer = (user, userAnswer) => {
     if (user && answer) {
-      return user.toLowerCase() === userAnswer.toLowerCase();
+      return user.toLowerCase().trim() === userAnswer.toLowerCase();
     }
     return false;
   };
