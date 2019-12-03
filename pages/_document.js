@@ -13,8 +13,13 @@ class MyDocument extends Document {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (
-      <Html>
+      <Html lang="en-US">
         <Head>
+          <meta
+            name="description"
+            content="Application to practice conjugating Portuguese verbs in different tenses, Brazil and Portugal."
+          />
+          <title>Verbugata - Portuguese verb conjugation practice</title>
           <link
             rel="apple-touch-icon"
             sizes="180x180"
