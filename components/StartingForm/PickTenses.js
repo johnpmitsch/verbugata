@@ -15,9 +15,6 @@ export default function PickTenses({ setSelectedTenses }) {
   const [checked, setChecked] = useState({ Presente: true });
   const [allTenses, setAllTenses] = useState([]);
 
-  // Need to add single input form and clean up data to support the imperativo tense
-  const exclude = ["gerúndio", "particípio passado"];
-
   const handleChange = name => event => {
     setChecked({ ...checked, [name]: event.target.checked });
   };
@@ -27,9 +24,7 @@ export default function PickTenses({ setSelectedTenses }) {
   }, []);
 
   useEffect(() => {
-    const filteredTenses = Object.keys(checked)
-      .filter(t => checked[t])
-      .filter(x => !exclude.includes(x));
+    const filteredTenses = Object.keys(checked).filter(t => checked[t]);
     setSelectedTenses(filteredTenses);
   });
 

@@ -17,6 +17,7 @@ class MyApp extends App {
 
   static componentDidMount() {
     // Remove the server-side injected CSS.
+    // eslint-disable-next-line no-undef
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -51,7 +52,7 @@ class MyApp extends App {
             <Container
               style={{
                 textAlign: "center",
-                margin: "40px 0px 150px 0px",
+                margin: "40px auto 150px auto",
                 padding: "0px"
               }}
             >

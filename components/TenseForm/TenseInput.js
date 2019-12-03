@@ -7,7 +7,7 @@ import {
   FaRegCircle
 } from "react-icons/fa";
 
-const TenseInput = ({ person, checkAnswers, answer }) => {
+const TenseInput = ({ text, checkAnswers, answer, disabled = false }) => {
   const [input, setInput] = useState(null);
 
   const checkAnswer = (user, userAnswer) => {
@@ -32,8 +32,9 @@ const TenseInput = ({ person, checkAnswers, answer }) => {
 
       <Grid item xs={5}>
         <TextField
+          disabled={disabled}
           error={checkAnswers && !checkAnswer(input, answer)}
-          helperText={person}
+          helperText={disabled ? "-" : text}
           label={checkAnswers ? answer : " "}
           onChange={e => setInput(e.target.value)}
           margin="normal"

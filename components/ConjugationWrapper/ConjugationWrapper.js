@@ -11,8 +11,6 @@ export default function ConjugationWrapper({
   verbDetails,
   includeTu
 }) {
-  const imperativeTenses = ["Imperativo Afirmativo", "Imperativo Negativo"];
-
   return (
     <React.Fragment>
       <form onSubmit={submitAnswers}>
@@ -27,7 +25,6 @@ export default function ConjugationWrapper({
                     tense={tense}
                     conjugations={verbDetails.conjugations[0]}
                     ptBr={!includeTu}
-                    imperativo={imperativeTenses.includes(tense)}
                   />
                 </CardContent>
               </Card>
