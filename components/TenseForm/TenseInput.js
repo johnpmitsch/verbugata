@@ -37,6 +37,7 @@ const TenseInput = ({ text, checkAnswers, answer, disabled = false }) => {
           helperText={disabled ? "-" : text}
           label={checkAnswers ? answer : " "}
           onChange={e => setInput(e.target.value)}
+          inputProps={{ spellCheck: false }}
           margin="normal"
         />
       </Grid>
