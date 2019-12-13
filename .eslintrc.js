@@ -1,12 +1,17 @@
 module.exports = {
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "plugin:react/recommended", "plugin:prettier/recommended"],
-  "settings": {
-    "react": {
-      "version": "detect"
+  parser: "babel-eslint",
+  extends: [
+    "airbnb-base",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
+  ],
+  settings: {
+    react: {
+      version: "detect"
     }
   },
-  "rules": {
+  rules: {
     "prettier/prettier": ["error"],
     "no-console": "off",
     "no-restricted-syntax": "off",
@@ -19,5 +24,6 @@ module.exports = {
     "react/jsx-no-undef": "off",
     "lines-between-class-members": "off",
     "no-prototype-builtins": "off",
-  },
+    "func-names": "off"
+  }
 };

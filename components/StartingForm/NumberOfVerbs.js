@@ -19,11 +19,12 @@ export default function NumberOfVerbs({ amount, setAmount }) {
 
       <Grid item xs={12}>
         <FormControl>
-          <InputLabel shrink id="number-of-verbs-labell">
+          <InputLabel shrink id="number-of-verbs-label">
             Number of Verbs
           </InputLabel>
           <Select
-            labelId="number-of-verbs-labell"
+            labelId="number-of-verbs-label"
+            inputProps={{ id: "number-of-verbs-input" }}
             id="number-of-verbs"
             value={amount}
             onChange={event => setAmount(event.target.value)}

@@ -57,6 +57,7 @@ export default function PickTenses({ setSelectedTenses }) {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        id={`${tense.replace(" ", "-")}-checkbox`}
                         checked={!!checked[tense]}
                         onChange={handleChange(tense)}
                         value={tense}
