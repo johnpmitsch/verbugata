@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/johnpmitsch/verbugata",
   "scripts": {
     "dev": "next",
     "build": "next build",
