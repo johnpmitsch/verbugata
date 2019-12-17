@@ -22,6 +22,7 @@ export default function ConjugationWrapper({
                   <TenseForm
                     checkAnswers={checkAnswers}
                     key={i}
+                    tabOffset={6 * (i + 1)}
                     tense={tense}
                     conjugations={verbDetails.conjugations[0]}
                     ptBr={!includeTu}
@@ -31,7 +32,12 @@ export default function ConjugationWrapper({
             </Grid>
           ))}
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              tabindex={1000}
+            >
               {checkAnswers ? "Hide" : "Check"} Answers
             </Button>
           </Grid>

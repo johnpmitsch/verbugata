@@ -1,10 +1,15 @@
 import TenseInput from "./TenseInput";
 
-export default function MultipleTenses({ persons, conjugation, checkAnswers }) {
+export default function MultipleTenses({
+  persons,
+  conjugation,
+  checkAnswers,
+  tabOffset
+}) {
   return (
     <React.Fragment>
       {persons.map(
-        (person, i) =>
+        ([person, i]) =>
           conjugation && (
             <TenseInput
               checkAnswers={conjugation.hasOwnProperty(person) && checkAnswers}
@@ -12,6 +17,7 @@ export default function MultipleTenses({ persons, conjugation, checkAnswers }) {
               text={person}
               answer={conjugation[person]}
               disabled={!conjugation.hasOwnProperty(person)}
+              tabIndex={tabOffset + i}
             />
           )
       )}
